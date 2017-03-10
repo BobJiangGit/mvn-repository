@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>org.mybatis.extend</groupId>
+  <artifactId>mybatis-generator-extend</artifactId>
+  <versioning>
+    <versions>
+      <version>1.0.0-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20170310073309</lastUpdated>
+  </versioning>
+</metadata>
