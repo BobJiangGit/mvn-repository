@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.x</groupId>
+        <artifactId>x-cloud-starters</artifactId>
+        <version>1.1.6</version>
+    </parent>
+
+    <groupId>com.x</groupId>
+    <artifactId>x-starters</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>x-starter-cache</module>
+        <module>x-starter-cloud</module>
+        <module>x-starter-mybatis</module>
+        <module>x-starter-redis</module>
+        <module>x-starter-web</module>
+        <module>x-starter-rocketmq</module>
+        <module>x-starter-mybatis-hikaricp</module>
+        <module>x-starter-swagger</module>
+        <module>x-starter-spring</module>
+        <module>x-starter-prometheus</module>
+    </modules>
+
+</project>
