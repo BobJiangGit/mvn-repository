@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-parent</artifactId>
+        <version>Edgware.RELEASE</version>
+        <relativePath />
+    </parent>
+
+    <groupId>com.x</groupId>
+    <artifactId>x-cloud-starters</artifactId>
+    <version>1.1.6</version>
+    <packaging>pom</packaging>
+
+    <name>x-cloud-starters</name>
+    <description>X Cloud Starters</description>
+    <url>https://github.com/BobJiangGit/x-cloud-starters.git</url>
+
+    <modules>
+        <module>x-autoconfigure</module>
+        <module>x-commons</module>
+        <module>x-configures</module>
+        <module>x-starters</module>
+        <module>x-utils</module>
+    </modules>
+
+    <developers>
+        <developer>
+            <name>Bob Jiang</name>
+            <email>jw244849875@gmail.com</email>
+        </developer>
+    </developers>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <github.global.server>github</github.global.server>
+
+        <!-- 通用工具包版本设置 -->
+        <validator.version>5.3.5.Final</validator.version>
+        <commons-lang3.version>3.3.2</commons-lang3.version>
+        <commons-beanutils.version>1.9.1</commons-beanutils.version>
+        <commons.lang.version>2.6</commons.lang.version>
+        <commons.fileupload.version>1.3.1</commons.fileupload.version>
+        <commons.io.version>2.5</commons.io.version>
+        <commons.codec.version>1.10</commons.codec.version>
+        <commons.configuration.version>1.10</commons.configuration.version>
+
+        <xstream.version>1.4.7</xstream.version>
+        <guava.version>20.0</guava.version>
+        <dozer.version>5.5.1</dozer.version>
+        <email.version>1.4.7</email.version>
+        <poi.version>3.9</poi.version>
+        <cglib.version>3.2.5</cglib.version>
+        <jxl.version>2.6</jxl.version>
+
+        <quartz.version>2.3.0</quartz.version>
+        <qiniu.version>[7.2.0, 7.2.99]</qiniu.version>
+        <qcloud.cos.version>4.4</qcloud.cos.version>
+        <cas-client-core.version>3.4.1</cas-client-core.version>
+        <activiti.version>5.22.0</activiti.version>
+        <zookeeper.version>3.4.12</zookeeper.version>
+        <zkclient.version>0.10</zkclient.version>
+        <httpclient.version>4.5.3</httpclient.version>
+        <disruptor.version>3.3.6</disruptor.version>
+        <rocketmq.version>0.1.0</rocketmq.version>
+        <swagger.version>2.9.2</swagger.version>
+        <swagger.annotations.version>1.5.20</swagger.annotations.version>
+        <micrometer.version>1.1.5</micrometer.version>
+
+        <!-- aliyun -->
+        <aliyun-sdk-oss.version>2.6.0</aliyun-sdk-oss.version>
+        <aliyun-sdk-openservices-ons.version>1.2.7.Final</aliyun-sdk-openservices-ons.version>
+        <fastjson.version>1.2.62</fastjson.version>
+        <druid.version>1.1.4</druid.version>
+        <spring-boot-admin.version>1.5.7</spring-boot-admin.version>
+        <dubbo-boot.version>2.0.0</dubbo-boot.version>
+
+        <!-- mysql -->
+        <mybatisplus-spring-boot-starter.version>1.0.1</mybatisplus-spring-boot-starter.version>
+        <mybatis-plus.version>3.1.0</mybatis-plus.version>
+        <mybatis.spring.boot.version>1.3.0</mybatis.spring.boot.version>
+        <mysql.version>5.1.38</mysql.version>
+        <hikaricp.version>2.5.1</hikaricp.version>
+
+        <x.cloud.version>1.1.6</x.cloud.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <generateBackupPoms>false</generateBackupPoms>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.8.1</version>
+                <configuration>
+                    <altDeploymentRepository>
+                        internal.repo::default::file://${project.build.directory}/mvn-repository
+                    </altDeploymentRepository>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.12</version>
+                <configuration>
+                    <message>${project.artifactId} ${project.version}</message>
+                    <noJekyll>true</noJekyll>
+                    <merge>true</merge>
+                    <outputDirectory>${project.build.directory}/mvn-repository</outputDirectory>
+                    <!--snapshot版本提交到master分支，release提交到release分支-->
+                    <branch>refs/heads/release</branch>
+                    <includes>
+                        <include>**/*</include>
+                    </includes>
+                    <repositoryName>mvn-repository</repositoryName>
+                    <repositoryOwner>bob-jiang-git</repositoryOwner>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
+                        <phase>deploy</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>${cglib.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.sourceforge.jexcelapi</groupId>
+                <artifactId>jxl</artifactId>
+                <version>${jxl.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>${swagger.annotations.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.lmax</groupId>
+                <artifactId>disruptor</artifactId>
+                <version>${disruptor.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zaxxer</groupId>
+                <artifactId>HikariCP</artifactId>
+                <version>${hikaricp.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-registry-prometheus</artifactId>
+                <version>${micrometer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-spring-legacy</artifactId>
+                <version>${micrometer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${validator.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.spring.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-annotation</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.maihaoche</groupId>
+                <artifactId>spring-boot-starter-rocketmq</artifactId>
+                <version>${rocketmq.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Edgware.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-commons</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-utils</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-autoconfigure</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-configures</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-configure-cache</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-configure-mybatis</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-configure-redis</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-configure-web</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-configure-rocketmq</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-configure-logging</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-configure-datasource-druid</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-configure-datasource-hikaricp</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-configure-swagger</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-configure-prometheus</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-configure-cloud</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-starters</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-starter-cache</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-starter-mybatis</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-starter-redis</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-starter-web</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-starter-rocketmq</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-starter-mybatis-hikaricp</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-starter-swagger</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-starter-spring</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-starter-prometheus</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>x-starter-cloud</artifactId>
+                <version>${x.cloud.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+</project>
