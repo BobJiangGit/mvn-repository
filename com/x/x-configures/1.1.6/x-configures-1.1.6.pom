@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.x</groupId>
+        <artifactId>x-cloud-starters</artifactId>
+        <version>1.1.6</version>
+    </parent>
+
+    <groupId>com.x</groupId>
+    <artifactId>x-configures</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>x-configure-cache</module>
+        <module>x-configure-cloud</module>
+        <module>x-configure-datasource-druid</module>
+        <module>x-configure-datasource-hikaricp</module>
+        <module>x-configure-logging</module>
+        <module>x-configure-mybatis</module>
+        <module>x-configure-prometheus</module>
+        <module>x-configure-redis</module>
+        <module>x-configure-rocketmq</module>
+        <module>x-configure-swagger</module>
+        <module>x-configure-web</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.x</groupId>
+            <artifactId>x-commons</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.x</groupId>
+            <artifactId>x-utils</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
